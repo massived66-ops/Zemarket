@@ -13,6 +13,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
   Search,
   Smartphone,
@@ -344,12 +345,12 @@ function Header() {
         </div>
 
         <div className="hidden shrink-0 items-center gap-2 md:flex">
-          <button className="rounded-full px-4 py-2 text-sm font-medium text-[#1D1D1F] transition hover:bg-black/5">
+          <Link href="/login" className="rounded-full px-4 py-2 text-sm font-medium text-[#1D1D1F] transition hover:bg-black/5">
             Connexion
-          </button>
-          <button className="rounded-full px-4 py-2 text-sm font-medium text-[#1D1D1F] transition hover:bg-black/5">
+          </Link>
+          <Link href="/login" className="rounded-full px-4 py-2 text-sm font-medium text-[#1D1D1F] transition hover:bg-black/5">
             Créer un compte
-          </button>
+          </Link>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.96 }}
@@ -387,12 +388,12 @@ function Header() {
               />
             </div>
             <div className="flex flex-col gap-1">
-              <button className="rounded-xl px-4 py-2.5 text-left text-sm font-medium hover:bg-black/5">
+              <Link href="/login" className="rounded-xl px-4 py-2.5 text-left text-sm font-medium hover:bg-black/5">
                 Connexion
-              </button>
-              <button className="rounded-xl px-4 py-2.5 text-left text-sm font-medium hover:bg-black/5">
+              </Link>
+              <Link href="/login" className="rounded-xl px-4 py-2.5 text-left text-sm font-medium hover:bg-black/5">
                 Créer un compte
-              </button>
+              </Link>
               <button className="mt-1 rounded-xl bg-[#00A651] px-4 py-2.5 text-sm font-semibold text-white">
                 Vendre
               </button>
