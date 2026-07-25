@@ -388,14 +388,13 @@ function Header() {
               </Link>
             </>
           )}
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.96 }}
+          <Link
+            href="/publier"
             onClick={createRipple}
             className="rounded-full bg-[#00A651] px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-[#00A651]/20 outline-none transition hover:shadow-lg hover:shadow-[#00A651]/30 focus-visible:ring-2 focus-visible:ring-[#00A651] focus-visible:ring-offset-2"
           >
             Vendre
-          </motion.button>
+          </Link>
         </div>
 
         <button
@@ -447,9 +446,9 @@ function Header() {
                   </Link>
                 </>
               )}
-              <button className="mt-1 rounded-xl bg-[#00A651] px-4 py-2.5 text-sm font-semibold text-white">
+              <Link href="/publier" className="mt-1 rounded-xl bg-[#00A651] px-4 py-2.5 text-sm font-semibold text-white text-center">
                 Vendre
-              </button>
+              </Link>
             </div>
           </motion.div>
         )}
@@ -512,14 +511,13 @@ function Hero() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="mt-10 flex flex-col gap-3 sm:flex-row"
         >
-          <motion.button
-            whileHover={{ scale: 1.04, y: -2 }}
-            whileTap={{ scale: 0.97 }}
+          <Link
+            href="/publier"
             onClick={createRipple}
             className="rounded-full bg-[#00A651] px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-[#00A651]/25 outline-none transition focus-visible:ring-2 focus-visible:ring-[#00A651] focus-visible:ring-offset-2"
           >
             Commencer à vendre
-          </motion.button>
+          </Link>
           <motion.button
             whileHover={{ scale: 1.04, y: -2 }}
             whileTap={{ scale: 0.97 }}
