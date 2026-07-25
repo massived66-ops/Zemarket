@@ -425,12 +425,28 @@ function Header() {
               />
             </div>
             <div className="flex flex-col gap-1">
-              <Link href="/login" className="rounded-xl px-4 py-2.5 text-left text-sm font-medium hover:bg-black/5">
-                Connexion
-              </Link>
-              <Link href="/login" className="rounded-xl px-4 py-2.5 text-left text-sm font-medium hover:bg-black/5">
-                Créer un compte
-              </Link>
+              {user ? (
+                <>
+                  <span className="truncate rounded-xl px-4 py-2.5 text-sm font-medium text-[#1D1D1F]/70">
+                    {user.email}
+                  </span>
+                  <button
+                    onClick={handleLogout}
+                    className="rounded-xl px-4 py-2.5 text-left text-sm font-medium hover:bg-black/5"
+                  >
+                    Déconnexion
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link href="/login" className="rounded-xl px-4 py-2.5 text-left text-sm font-medium hover:bg-black/5">
+                    Connexion
+                  </Link>
+                  <Link href="/login" className="rounded-xl px-4 py-2.5 text-left text-sm font-medium hover:bg-black/5">
+                    Créer un compte
+                  </Link>
+                </>
+              )}
               <button className="mt-1 rounded-xl bg-[#00A651] px-4 py-2.5 text-sm font-semibold text-white">
                 Vendre
               </button>
