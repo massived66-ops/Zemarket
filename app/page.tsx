@@ -39,6 +39,9 @@ import {
   Upload,
   MessagesSquare,
   Handshake,
+  Facebook,
+  Instagram,
+  Twitter,
 } from "lucide-react";
 import { motion, AnimatePresence, useInView, Variants } from "framer-motion";
 
