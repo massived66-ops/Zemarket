@@ -539,4 +539,739 @@ function Categories() {
           className="mb-10 flex items-end justify-between"
         >
           <div>
-            <h2 className="text-3xl font-bold tracking-tight text-[#1D1D1
+            <h2 className="text-3xl font-bold tracking-tight text-[#1D1D1F]">
+  Parcourir les catégories
+</h2>
+
+<p className="mt-3 max-w-2xl text-[#1D1D1F]/60">
+  Découvrez des milliers d'annonces classées par catégorie,
+  partout au Cameroun.
+</p>
+</div>
+
+<a
+  href="#"
+  className="hidden items-center gap-2 text-sm font-semibold text-[#00A651] transition hover:gap-3 md:flex"
+>
+  Voir toutes
+  <ArrowRight className="h-4 w-4" />
+</a>
+</motion.div>
+
+<motion.div
+  variants={staggerContainer}
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true }}
+  className="grid grid-cols-2 gap-5 md:grid-cols-4"
+>
+  {CATEGORIES.map((category) => {
+    const Icon = category.icon;
+
+    return (
+      <motion.div
+        key={category.id}
+        variants={fadeUp}
+        whileHover={{ y: -8, scale: 1.03 }}
+        transition={{ duration: 0.3 }}
+        className="group cursor-pointer rounded-3xl border border-white/50 bg-white p-6 shadow-lg transition hover:shadow-2xl"
+      >
+        <div
+          className="mb-5 flex h-16 w-16 items-center justify-center rounded-2xl"
+          style={{
+            backgroundColor: `${category.color}20`,
+          }}
+        >
+          <Icon
+            className="h-8 w-8"
+            style={{ color: category.color }}
+          />
+        </div>
+
+        <h3 className="text-lg font-semibold text-[#1D1D1F]">
+          {category.label}
+        </h3>
+
+        <p className="mt-2 text-sm text-[#1D1D1F]/55">
+          {category.count} annonces
+        </p>
+
+        <div className="mt-5 flex items-center gap-2 text-sm font-medium text-[#00A651] opacity-0 transition group-hover:opacity-100">
+          Explorer
+          <ArrowRight className="h-4 w-4" />
+        </div>
+      </motion.div>
+    );
+  })}
+</motion.div>
+</div>
+</section>
+);
+  }
+/* ------------------------------------------------------------------ */
+/*  FEATURED PRODUCTS                                                  */
+/* ------------------------------------------------------------------ */
+
+function FeaturedProducts() {
+  const [favorites, setFavorites] = useState<string[]>([]);
+  const [toast, setToast] = useState<ToastState>(null);
+
+  const toggleFavorite = (id: string) => {
+    const exists = favorites.includes(id);
+
+    setFavorites((prev) =>
+      exists ? prev.filter((item) => item !== id) : [...prev, id]
+    );
+
+    setToast({
+      id: Date.now(),
+      message: exists
+        ? "Produit retiré des favoris."
+        : "Produit ajouté aux favoris ❤️",
+    });
+
+    setTimeout(() => setToast(null), 2500);
+  };
+
+  return (
+    <section className="bg-[#F8F9FB] px-4 py-24">
+      <div className="mx-auto max-w-7xl">
+
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mb-12 flex items-center justify-between"
+        >
+          <div>
+            <h2 className="text-3xl font-bold tracking-tight text-[#1D1D1F]">
+              Produits en vedette
+            </h2>
+
+            <p className="mt-2 text-[#1D1D1F]/60">
+              Les meilleures annonces sélectionnées aujourd'hui.
+            </p>
+          </div>
+
+          <button className="hidden rounded-full border border-black/10 px-5 py-2 text-sm font-medium transition hover:bg-white md:block">
+            Voir tout
+          </button>
+        </motion.div>
+        <motion.div
+  variants={staggerContainer}
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true }}
+  className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
+>
+  {PRODUCTS.map((product) => {
+    const liked = favorites.includes(product.id);
+
+    return (
+      <motion.div
+        key={product.id}
+        variants={fadeUp}
+        whileHover={{ y: -8 }}
+        transition={{ duration: 0.3 }}
+        className="overflow-hidden rounded-3xl border border-white/60 bg-white shadow-lg"
+      >
+        <div className="relative aspect-[4/3] overflow-hidden">
+          <Image
+            src={product.image}
+            alt={product.title}
+            fill
+            unoptimized
+            className="object-cover transition duration-500 hover:scale-110"
+          />
+
+          <button
+            onClick={() => toggleFavorite(product.id)}
+            className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 backdrop-blur"
+          >
+            <Heart
+              className={`h-5 w-5 ${
+                liked
+                  ? "fill-red-500 text-red-500"
+                  : "text-[#1D1D1F]"
+              }`}
+            />
+          </button>
+        </div>
+
+        <div className="space-y-4 p-5">
+
+          <h3 className="line-clamp-2 text-lg font-semibold text-[#1D1D1F]">
+            {product.title}
+          </h3>
+
+          <p className="text-2xl font-bold text-[#00A651]">
+            {product.price}
+          </p>
+
+          <div className="flex items-center gap-2 text-sm text-[#1D1D1F]/60">
+            <MapPin className="h-4 w-4" />
+            {product.city}
+          </div>
+
+          <div className="flex items-center justify-between">
+
+            <div className="flex items-center gap-2">
+
+              <span className="text-sm font-medium">
+                {product.seller}
+              </span>
+
+              {product.verified && (
+                <BadgeCheck className="h-4 w-4 text-[#00A651]" />
+              )}
+
+            </div>
+
+            <span className="text-xs text-[#1D1D1F]/45">
+              {product.postedAt}
+            </span>
+
+          </div>
+
+          <div className="flex gap-3">
+
+            <button
+              onClick={createRipple}
+              className="flex-1 rounded-full bg-[#00A651] py-3 text-sm font-semibold text-white transition hover:opacity-90"
+            >
+              Contacter
+            </button>
+
+            <button
+              onClick={createRipple}
+              className="flex h-12 w-12 items-center justify-center rounded-full border border-black/10"
+            >
+              <MessageCircle className="h-5 w-5" />
+            </button>
+
+          </div>
+
+        </div>
+
+      </motion.div>
+    );
+  })}
+</motion.div>
+
+<Toast toast={toast} />
+
+</div>
+</section>
+);
+              }
+/* ------------------------------------------------------------------ */
+/*  HOW IT WORKS                                                       */
+/* ------------------------------------------------------------------ */
+
+function HowItWorks() {
+  const steps = [
+    {
+      icon: Upload,
+      title: "Publiez votre annonce",
+      description:
+        "Prenez quelques photos, ajoutez une description et publiez gratuitement votre produit en moins d'une minute.",
+    },
+    {
+      icon: MessagesSquare,
+      title: "Discutez avec les acheteurs",
+      description:
+        "Échangez facilement grâce à la messagerie intégrée et négociez en toute sécurité.",
+    },
+    {
+      icon: Handshake,
+      title: "Vendez rapidement",
+      description:
+        "Rencontrez l'acheteur et concluez votre vente en toute confiance.",
+    },
+  ];
+
+  return (
+    <section className="px-4 py-24 bg-white">
+      <div className="mx-auto max-w-7xl">
+
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mx-auto mb-16 max-w-3xl text-center"
+        >
+          <h2 className="text-4xl font-bold tracking-tight text-[#1D1D1F]">
+            Comment ça fonctionne ?
+          </h2>
+
+          <p className="mt-4 text-lg text-[#1D1D1F]/60">
+            Trois étapes simples pour acheter ou vendre partout au Cameroun.
+          </p>
+        </motion.div>
+
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid gap-8 md:grid-cols-3"
+        >
+          {steps.map((step, index) => {
+            const Icon = step.icon;
+
+            return (
+              <motion.div
+                key={step.title}
+                variants={fadeUp}
+                whileHover={{ y: -8 }}
+                className="rounded-3xl border border-black/5 bg-[#F8F9FB] p-8 shadow-sm"
+              >
+                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#00A651]/10">
+                  <Icon className="h-8 w-8 text-[#00A651]" />
+                </div>
+
+                <span className="text-sm font-semibold text-[#00A651]">
+                  Étape {index + 1}
+                </span>
+
+                <h3 className="mt-2 text-2xl font-bold text-[#1D1D1F]">
+                  {step.title}
+                </h3>
+
+                <p className="mt-4 leading-7 text-[#1D1D1F]/60">
+                  {step.description}
+                </p>
+              </motion.div>
+            );
+          })}
+        </motion.div>
+
+      </div>
+    </section>
+  );
+      }
+/* ------------------------------------------------------------------ */
+/*  STATS                                                              */
+/* ------------------------------------------------------------------ */
+
+function StatsSection() {
+  return (
+    <section className="bg-[#00A651] px-4 py-24">
+      <div className="mx-auto max-w-7xl">
+
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4"
+        >
+          {STATS.map((stat) => (
+            <motion.div
+              key={stat.id}
+              variants={fadeUp}
+              className="rounded-3xl bg-white/10 p-8 text-center backdrop-blur-xl"
+            >
+              <h3 className="text-5xl font-bold text-white">
+                {stat.value}
+                {stat.suffix}
+              </h3>
+
+              <p className="mt-3 text-lg text-white/80">
+                {stat.label}
+              </p>
+            </motion.div>
+          ))}
+        </motion.div>
+
+      </div>
+    </section>
+  );
+              }
+/* ------------------------------------------------------------------ */
+/*  TESTIMONIALS                                                       */
+/* ------------------------------------------------------------------ */
+
+function Testimonials() {
+  return (
+    <section className="bg-[#F8F9FB] px-4 py-24">
+      <div className="mx-auto max-w-7xl">
+
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mx-auto mb-16 max-w-3xl text-center"
+        >
+          <h2 className="text-4xl font-bold tracking-tight text-[#1D1D1F]">
+            Ce que disent nos utilisateurs
+          </h2>
+
+          <p className="mt-4 text-lg text-[#1D1D1F]/60">
+            Des milliers de Camerounais utilisent déjà ZeMarket chaque jour.
+          </p>
+        </motion.div>
+
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid gap-8 md:grid-cols-3"
+        >
+          {TESTIMONIALS.map((testimonial) => (
+            <motion.div
+              key={testimonial.id}
+              variants={fadeUp}
+              whileHover={{ y: -6 }}
+              className="rounded-3xl bg-white p-8 shadow-lg"
+            >
+              <div className="mb-6 flex">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <Star
+                    key={star}
+                    className="h-5 w-5 fill-yellow-400 text-yellow-400"
+                  />
+                ))}
+              </div>
+
+              <p className="leading-7 text-[#1D1D1F]/70">
+                "{testimonial.message}"
+              </p>
+
+              <div className="mt-8 flex items-center gap-4">
+                <Image
+                  src={testimonial.avatar}
+                  alt={testimonial.name}
+                  width={56}
+                  height={56}
+                  unoptimized
+                  className="rounded-full object-cover"
+                />
+
+                <div>
+                  <h4 className="font-semibold text-[#1D1D1F]">
+                    {testimonial.name}
+                  </h4>
+
+                  <p className="text-sm text-[#1D1D1F]/55">
+                    {testimonial.city}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+      </div>
+    </section>
+  );
+          }
+/* ------------------------------------------------------------------ */
+/*  DOWNLOAD APP                                                       */
+/* ------------------------------------------------------------------ */
+
+function DownloadApp() {
+  return (
+    <section className="px-4 py-24">
+      <div className="mx-auto max-w-7xl">
+
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="overflow-hidden rounded-[40px] bg-gradient-to-r from-[#00A651] to-[#009245] p-10 text-white md:p-16"
+        >
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+
+            <div>
+              <span className="rounded-full bg-white/20 px-4 py-2 text-sm font-semibold">
+                Application mobile
+              </span>
+
+              <h2 className="mt-6 text-4xl font-bold leading-tight">
+                Achetez et vendez partout, directement depuis votre téléphone.
+              </h2>
+
+              <p className="mt-6 max-w-xl text-lg text-white/90">
+                Téléchargez l'application ZeMarket et profitez d'une
+                expérience encore plus rapide, avec des notifications
+                instantanées, une messagerie intégrée et des milliers
+                d'annonces à portée de main.
+              </p>
+
+              <div className="mt-10 flex flex-wrap gap-4">
+
+                <button
+                  onClick={createRipple}
+                  className="rounded-2xl bg-white px-8 py-4 font-semibold text-[#00A651] transition hover:scale-105"
+                >
+                  Télécharger sur Android
+                </button>
+
+                <button
+                  onClick={createRipple}
+                  className="rounded-2xl border border-white/40 px-8 py-4 font-semibold transition hover:bg-white/10"
+                >
+                  Télécharger sur iPhone
+                </button>
+
+              </div>
+            </div>
+
+            <motion.div
+              animate={{ y: [0, -12, 0] }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              className="relative mx-auto h-[500px] w-[260px]"
+            >
+              <Image
+                src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800"
+                alt="Application ZeMarket"
+                fill
+                unoptimized
+                className="rounded-[40px] object-cover shadow-2xl"
+              />
+            </motion.div>
+
+          </div>
+        </motion.div>
+
+      </div>
+    </section>
+  );
+}
+/* ------------------------------------------------------------------ */
+/*  FAQ                                                                */
+/* ------------------------------------------------------------------ */
+
+function FAQ() {
+  const faqs = [
+    {
+      question: "Publier une annonce est-il gratuit ?",
+      answer:
+        "Oui. Vous pouvez publier gratuitement vos annonces sur ZeMarket en quelques minutes.",
+    },
+    {
+      question: "Comment contacter un vendeur ?",
+      answer:
+        "Il suffit d'ouvrir l'annonce puis de cliquer sur « Contacter ». Vous pourrez discuter directement avec le vendeur.",
+    },
+    {
+      question: "Puis-je vendre partout au Cameroun ?",
+      answer:
+        "Oui. ZeMarket est disponible dans toutes les régions du Cameroun afin de faciliter les échanges entre particuliers et professionnels.",
+    },
+    {
+      question: "Comment éviter les arnaques ?",
+      answer:
+        "Privilégiez les rencontres dans un lieu public, vérifiez le produit avant le paiement et utilisez les outils de signalement disponibles sur la plateforme.",
+    },
+  ];
+
+  return (
+    <section className="bg-[#F8F9FB] px-4 py-24">
+      <div className="mx-auto max-w-4xl">
+
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mb-16 text-center"
+        >
+          <h2 className="text-4xl font-bold text-[#1D1D1F]">
+            Questions fréquentes
+          </h2>
+
+          <p className="mt-4 text-lg text-[#1D1D1F]/60">
+            Les réponses aux questions les plus posées.
+          </p>
+        </motion.div>
+
+        <div className="space-y-5">
+          {faqs.map((faq) => (
+            <motion.div
+              key={faq.question}
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="rounded-2xl bg-white p-6 shadow-md"
+            >
+              <h3 className="text-lg font-semibold text-[#1D1D1F]">
+                {faq.question}
+              </h3>
+
+              <p className="mt-3 leading-7 text-[#1D1D1F]/65">
+                {faq.answer}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+  );
+}
+/* ------------------------------------------------------------------ */
+/*  FOOTER                                                             */
+/* ------------------------------------------------------------------ */
+
+function Footer() {
+  return (
+    <footer className="bg-[#111111] px-4 py-20 text-white">
+      <div className="mx-auto grid max-w-7xl gap-12 md:grid-cols-4">
+
+        <div>
+          <h2 className="text-3xl font-extrabold">
+            <span className="text-[#00A651]">Ze</span>Market
+          </h2>
+
+          <p className="mt-5 leading-7 text-white/70">
+            La marketplace moderne qui connecte acheteurs et vendeurs
+            partout au Cameroun.
+          </p>
+        </div>
+
+        <div>
+          <h3 className="mb-5 text-lg font-semibold">
+            Marketplace
+          </h3>
+
+          <ul className="space-y-3 text-white/70">
+            <li>
+              <a href="#" className="transition hover:text-white">
+                Accueil
+              </a>
+            </li>
+
+            <li>
+              <a href="#" className="transition hover:text-white">
+                Catégories
+              </a>
+            </li>
+
+            <li>
+              <a href="#" className="transition hover:text-white">
+                Publier une annonce
+              </a>
+            </li>
+
+            <li>
+              <a href="#" className="transition hover:text-white">
+                Contact
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 className="mb-5 text-lg font-semibold">
+            Entreprise
+          </h3>
+
+          <ul className="space-y-3 text-white/70">
+            <li>
+              <a href="#" className="transition hover:text-white">
+                À propos
+              </a>
+            </li>
+
+            <li>
+              <a href="#" className="transition hover:text-white">
+                Conditions d'utilisation
+              </a>
+            </li>
+
+            <li>
+              <a href="#" className="transition hover:text-white">
+                Politique de confidentialité
+              </a>
+            </li>
+
+            <li>
+              <a href="#" className="transition hover:text-white">
+                Assistance
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 className="mb-5 text-lg font-semibold">
+            Suivez-nous
+          </h3>
+
+          <div className="flex gap-4">
+
+            <a
+              href="#"
+              className="flex h-12 w-12 items-center justify-center rounded-full bg-white/10 transition hover:bg-[#00A651]"
+            >
+              <Facebook className="h-5 w-5" />
+            </a>
+
+            <a
+              href="#"
+              className="flex h-12 w-12 items-center justify-center rounded-full bg-white/10 transition hover:bg-[#00A651]"
+            >
+              <Instagram className="h-5 w-5" />
+            </a>
+
+            <a
+              href="#"
+              className="flex h-12 w-12 items-center justify-center rounded-full bg-white/10 transition hover:bg-[#00A651]"
+            >
+              <Twitter className="h-5 w-5" />
+            </a>
+
+          </div>
+        </div>
+
+      </div>
+
+      <div className="mx-auto mt-16 max-w-7xl border-t border-white/10 pt-8 text-center text-sm text-white/60">
+        © {new Date().getFullYear()} ZeMarket. Tous droits réservés.
+      </div>
+    </footer>
+  );
+              }
+/* ------------------------------------------------------------------ */
+/*  HOME PAGE                                                          */
+/* ------------------------------------------------------------------ */
+
+export default function Home() {
+  return (
+    <main className="min-h-screen overflow-x-hidden bg-white text-[#1D1D1F]">
+
+      <Header />
+
+      <Hero />
+
+      <Categories />
+
+      <FeaturedProducts />
+
+      <HowItWorks />
+
+      <StatsSection />
+
+      <Testimonials />
+
+      <DownloadApp />
+
+      <FAQ />
+
+      <Footer />
+
+    </main>
+  );
+}
