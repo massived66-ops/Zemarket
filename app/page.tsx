@@ -14,6 +14,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { supabase } from "../lib/supabaseClient";
 import {
   Search,
   Smartphone,
@@ -304,6 +305,26 @@ function Toast({ toast }: { toast: ToastState }) {
 /* ------------------------------------------------------------------ */
 
 function Header() {
+  const [user, setUser] = useState<{ email?: string } | null>(null);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => {
+      setUser(data.session?.user ?? null);
+    });
+
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => {
+      listener.subscription.unsubscribe();
+    };
+  }, []);
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    setUser(null);
+  };
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -345,12 +366,28 @@ function Header() {
         </div>
 
         <div className="hidden shrink-0 items-center gap-2 md:flex">
-          <Link href="/login" className="rounded-full px-4 py-2 text-sm font-medium text-[#1D1D1F] transition hover:bg-black/5">
-            Connexion
-          </Link>
-          <Link href="/login" className="rounded-full px-4 py-2 text-sm font-medium text-[#1D1D1F] transition hover:bg-black/5">
-            Créer un compte
-          </Link>
+          {user ? (
+            <>
+              <span className="max-w-[140px] truncate rounded-full px-4 py-2 text-sm font-medium text-[#1D1D1F]/70">
+                {user.email}
+              </span>
+              <button
+                onClick={handleLogout}
+                className="rounded-full px-4 py-2 text-sm font-medium text-[#1D1D1F] transition hover:bg-black/5"
+              >
+                Déconnexion
+              </button>
+            </>
+          ) : (
+            <>
+              <Link href="/login" className="rounded-full px-4 py-2 text-sm font-medium text-[#1D1D1F] transition hover:bg-black/5">
+                Connexion
+              </Link>
+              <Link href="/login" className="rounded-full px-4 py-2 text-sm font-medium text-[#1D1D1F] transition hover:bg-black/5">
+                Créer un compte
+              </Link>
+            </>
+          )}
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.96 }}
