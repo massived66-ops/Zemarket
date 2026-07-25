@@ -80,7 +80,7 @@ const PRODUCTS: Product[] = [
   {
     id: "p1",
     title: "iPhone 14 Pro 256Go — Excellent état",
-    price: "620 000 FCFA",
+    price: "350 000 FCFA",
     city: "Douala",
     seller: "Armand K.",
     verified: true,
@@ -120,7 +120,7 @@ const PRODUCTS: Product[] = [
   {
     id: "p5",
     title: "Sneakers Nike Air Max — Neuves",
-    price: "45 000 FCFA",
+    price: "35 000 FCFA",
     city: "Bertoua",
     seller: "Sandra M.",
     verified: true,
