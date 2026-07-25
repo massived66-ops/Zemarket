@@ -939,7 +939,7 @@ function Testimonials() {
               </div>
 
               <p className="leading-7 text-[#1D1D1F]/70">
-                "{testimonial.message}"
+                "{testimonial.comment}"
               </p>
 
               <div className="mt-8 flex items-center gap-4">
