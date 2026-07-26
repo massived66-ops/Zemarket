@@ -693,7 +693,18 @@ function Categories() {
 function FeaturedProducts() {
   const [favorites, setFavorites] = useState<string[]>([]);
   const [toast, setToast] = useState<ToastState>(null);
+  const [listings, setListings] = useState<any[]>([]);
 
+  useEffect(() => {
+    supabase
+      .from("listings")
+      .select("*")
+      .order("created_at", { ascending: false })
+      .limit(8)
+      .then(({ data }) => {
+        if (data) setListings(data.map(mapListingToProduct));
+      });
+  }, []);
   const toggleFavorite = (id: string) => {
     const exists = favorites.includes(id);
 
@@ -743,7 +754,7 @@ function FeaturedProducts() {
   viewport={{ once: true }}
   className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
 >
-  {PRODUCTS.map((product) => {
+  {(listings.length > 0 ? listings : PRODUCTS).map((product) => {
     const liked = favorites.includes(product.id);
 
     return (
