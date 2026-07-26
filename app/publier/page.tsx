@@ -10,6 +10,8 @@ export default function PublishPage() {
   const router = useRouter();
   const [checkingAuth, setCheckingAuth] = useState(true);
   const [userId, setUserId] = useState<string | null>(null);
+  const [listingCount, setListingCount] = useState(0);
+  const [isBoosted, setIsBoosted] = useState(false);
   const [userEmail, setUserEmail] = useState<string | null>(null);
 
   const [title, setTitle] = useState("");
@@ -23,12 +25,27 @@ export default function PublishPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => {
+    supabase.auth.getSession().then(async ({ data }) => {
       if (!data.session) {
         router.push("/login");
       } else {
-        setUserId(data.session.user.id);
+        const uid = data.session.user.id;
+        setUserId(uid);
         setUserEmail(data.session.user.email ?? null);
+
+        const { count } = await supabase
+          .from("listings")
+          .select("*", { count: "exact", head: true })
+          .eq("user_id", uid);
+        setListingCount(count ?? 0);
+
+        const { data: profile } = await supabase
+          .from("profiles")
+          .select("is_boosted")
+          .eq("id", uid)
+          .maybeSingle();
+        setIsBoosted(profile?.is_boosted === true);
+
         setCheckingAuth(false);
       }
     });
@@ -47,6 +64,14 @@ export default function PublishPage() {
     setError(null);
 
     if (!userId) return;
+
+    if (!isBoosted && listingCount >= 10) {
+      setError(
+        "Tu as atteint la limite de 10 annonces pour un compte gratuit. Passe au compte Boost pour publier plus."
+      );
+      return;
+    }
+
     setLoading(true);
 
     try {
