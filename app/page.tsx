@@ -864,12 +864,26 @@ function FeaturedProducts() {
 
           <div className="flex gap-3">
 
-            <button
-              onClick={createRipple}
-              className="flex-1 rounded-full bg-[#00A651] py-3 text-sm font-semibold text-white transition hover:opacity-90"
-            >
-              Contacter
-            </button>
+            {product.phone ? (
+              <a
+                href={`https://wa.me/${product.phone.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(
+                  `Bonjour, je suis intéressé(e) par votre annonce "${product.title}" sur ZeMarket.`
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={createRipple}
+                className="flex-1 rounded-full bg-[#00A651] py-3 text-center text-sm font-semibold text-white transition hover:opacity-90"
+              >
+                Contacter
+              </a>
+            ) : (
+              <button
+                disabled
+                className="flex-1 rounded-full bg-black/10 py-3 text-sm font-semibold text-[#1D1D1F]/40"
+              >
+                Contact indisponible
+              </button>
+            )}
 
             <button
               onClick={createRipple}
