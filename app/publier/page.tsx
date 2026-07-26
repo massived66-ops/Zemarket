@@ -10,6 +10,7 @@ export default function PublishPage() {
   const router = useRouter();
   const [checkingAuth, setCheckingAuth] = useState(true);
   const [userId, setUserId] = useState<string | null>(null);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
 
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
@@ -27,6 +28,7 @@ export default function PublishPage() {
         router.push("/login");
       } else {
         setUserId(data.session.user.id);
+        setUserEmail(data.session.user.email ?? null);
         setCheckingAuth(false);
       }
     });
@@ -74,6 +76,7 @@ export default function PublishPage() {
         city,
         description,
         image_url: imageUrl,
+        seller_email: userEmail,
       });
 
       if (insertError) throw insertError;
