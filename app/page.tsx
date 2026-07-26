@@ -696,14 +696,34 @@ function FeaturedProducts() {
   const [listings, setListings] = useState<any[]>([]);
 
   useEffect(() => {
-    supabase
-      .from("listings")
-      .select("*")
-      .order("created_at", { ascending: false })
-      .limit(8)
-      .then(({ data }) => {
-        if (data) setListings(data.map(mapListingToProduct));
-      });
+    async function loadListings() {
+      const { data } = await supabase
+        .from("listings")
+        .select("*")
+        .order("created_at", { ascending: false })
+        .limit(8);
+
+      if (!data) return;
+
+      const userIds = [...new Set(data.map((row) => row.user_id))];
+      const { data: profilesData } = await supabase
+        .from("profiles")
+        .select("id, is_verified")
+        .in("id", userIds);
+
+      const verifiedMap = new Map(
+        (profilesData || []).map((p) => [p.id, p.is_verified])
+      );
+
+      const mapped = data.map((row) => ({
+        ...mapListingToProduct(row),
+        verified: verifiedMap.get(row.user_id) === true,
+      }));
+
+      setListings(mapped);
+    }
+
+    loadListings();
   }, []);
   const toggleFavorite = (id: string) => {
     const exists = favorites.includes(id);
