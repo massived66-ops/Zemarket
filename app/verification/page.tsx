@@ -170,7 +170,7 @@ export default function VerificationPage() {
                 <span className="text-sm">Photo de ta pièce d'identité</span>
               </div>
             )}
-            <input type="file" accept="image/*" onChange={handleIdChange} className="hidden" />
+            <input type="file" accept="image/*" capture="environment" onChange={handleIdChange} className="hidden" />
           </label>
 
           <label className="relative flex h-40 cursor-pointer flex-col items-center justify-center overflow-hidden rounded-2xl border-2 border-dashed border-black/10 bg-white transition hover:border-[#00A651]/40">
@@ -183,7 +183,7 @@ export default function VerificationPage() {
                 <span className="text-sm">Ton selfie</span>
               </div>
             )}
-            <input type="file" accept="image/*" onChange={handleSelfieChange} className="hidden" />
+            <input type="file" accept="image/*" capture="user" onChange={handleSelfieChange} className="hidden" />
           </label>
 
           {error && (
