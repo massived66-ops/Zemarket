@@ -391,6 +391,12 @@ function Header() {
         <div className="hidden shrink-0 items-center gap-2 md:flex">
           {user ? (
             <>
+              <Link
+                href="/verification"
+                className="rounded-full px-4 py-2 text-sm font-medium text-[#00A651] transition hover:bg-black/5"
+              >
+                Devenir vérifié
+              </Link>
               <span className="max-w-[140px] truncate rounded-full px-4 py-2 text-sm font-medium text-[#1D1D1F]/70">
                 {user.email}
               </span>
@@ -449,6 +455,12 @@ function Header() {
             <div className="flex flex-col gap-1">
               {user ? (
                 <>
+                  <Link
+                    href="/verification"
+                    className="rounded-xl px-4 py-2.5 text-left text-sm font-medium text-[#00A651] hover:bg-black/5"
+                  >
+                    Devenir vérifié
+                  </Link>
                   <span className="truncate rounded-xl px-4 py-2.5 text-sm font-medium text-[#1D1D1F]/70">
                     {user.email}
                   </span>
