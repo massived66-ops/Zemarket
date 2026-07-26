@@ -174,7 +174,7 @@ function timeAgo(dateString: string) {
   return `Il y a ${days}j`;
 }
 
-function mapListingToProduct(row: any): Product {
+function mapListingToProduct(row: any) {
   return {
     id: row.id,
     title: row.title,
@@ -184,6 +184,7 @@ function mapListingToProduct(row: any): Product {
     verified: false,
     postedAt: timeAgo(row.created_at),
     image: row.image_url || "https://images.unsplash.com/photo-1607082349566-187342175e2f?w=800&q=80",
+    phone: row.phone_number || null,
   };
 }
 
