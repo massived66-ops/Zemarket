@@ -17,6 +17,7 @@ export default function PublishPage() {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [city, setCity] = useState("");
+  const [phone, setPhone] = useState("");
   const [description, setDescription] = useState("");
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
@@ -102,6 +103,7 @@ export default function PublishPage() {
         description,
         image_url: imageUrl,
         seller_email: userEmail,
+        phone_number: phone,
       });
 
       if (insertError) throw insertError;
@@ -175,6 +177,14 @@ export default function PublishPage() {
             value={city}
             onChange={(e) => setCity(e.target.value)}
             placeholder="Ville"
+            className="w-full rounded-2xl border border-black/10 bg-white px-4 py-3.5 text-sm outline-none transition focus:border-[#00A651]/40 focus:ring-2 focus:ring-[#00A651]/20"
+          />
+          <input
+            type="tel"
+            required
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            placeholder="Numéro WhatsApp (ex: 6XXXXXXXX)"
             className="w-full rounded-2xl border border-black/10 bg-white px-4 py-3.5 text-sm outline-none transition focus:border-[#00A651]/40 focus:ring-2 focus:ring-[#00A651]/20"
           />
 
