@@ -163,6 +163,29 @@ const PRODUCTS: Product[] = [
     image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80",
   },
 ];
+function timeAgo(dateString: string) {
+  const diffMs = Date.now() - new Date(dateString).getTime();
+  const minutes = Math.floor(diffMs / 60000);
+  if (minutes < 1) return "À l'instant";
+  if (minutes < 60) return `Il y a ${minutes} min`;
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `Il y a ${hours}h`;
+  const days = Math.floor(hours / 24);
+  return `Il y a ${days}j`;
+}
+
+function mapListingToProduct(row: any): Product {
+  return {
+    id: row.id,
+    title: row.title,
+    price: row.price,
+    city: row.city,
+    seller: row.seller_email ? row.seller_email.split("@")[0] : "Vendeur ZeMarket",
+    verified: false,
+    postedAt: timeAgo(row.created_at),
+    image: row.image_url || "https://images.unsplash.com/photo-1607082349566-187342175e2f?w=800&q=80",
+  };
+}
 
 type Testimonial = {
   id: string;
