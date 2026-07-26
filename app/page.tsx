@@ -720,17 +720,23 @@ function FeaturedProducts() {
       const userIds = [...new Set(data.map((row) => row.user_id))];
       const { data: profilesData } = await supabase
         .from("profiles")
-        .select("id, is_verified")
+        .select("id, is_verified, is_boosted")
         .in("id", userIds);
 
       const verifiedMap = new Map(
         (profilesData || []).map((p) => [p.id, p.is_verified])
       );
+      const boostedMap = new Map(
+        (profilesData || []).map((p) => [p.id, p.is_boosted])
+      );
 
-      const mapped = data.map((row) => ({
-        ...mapListingToProduct(row),
-        verified: verifiedMap.get(row.user_id) === true,
-      }));
+      const mapped = data
+        .map((row) => ({
+          ...mapListingToProduct(row),
+          verified: verifiedMap.get(row.user_id) === true,
+          boosted: boostedMap.get(row.user_id) === true,
+        }))
+        .sort((a, b) => Number(b.boosted) - Number(a.boosted));
 
       setListings(mapped);
     }
