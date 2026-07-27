@@ -1474,6 +1474,7 @@ export default function Home() {
       <Hero />
 
       <Categories />
+      <FindProfessional />
 
       <FeaturedProducts />
 
