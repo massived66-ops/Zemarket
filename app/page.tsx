@@ -399,6 +399,12 @@ function Header() {
               >
                 Devenir vérifié
               </Link>
+              <Link
+                href="/dashboard"
+                className="rounded-full px-4 py-2 text-sm font-medium text-[#1D1D1F] transition hover:bg-black/5"
+              >
+                Tableau de bord
+              </Link>
               <span className="max-w-[140px] truncate rounded-full px-4 py-2 text-sm font-medium text-[#1D1D1F]/70">
                 {user.email}
               </span>
@@ -462,6 +468,12 @@ function Header() {
                     className="rounded-xl px-4 py-2.5 text-left text-sm font-medium text-[#00A651] hover:bg-black/5"
                   >
                     Devenir vérifié
+                  </Link>
+                  <Link
+                    href="/dashboard"
+                    className="rounded-xl px-4 py-2.5 text-left text-sm font-medium hover:bg-black/5"
+                  >
+                    Tableau de bord
                   </Link>
                   <span className="truncate rounded-xl px-4 py-2.5 text-sm font-medium text-[#1D1D1F]/70">
                     {user.email}
