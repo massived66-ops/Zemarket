@@ -154,7 +154,7 @@ export default function PublishPage() {
             </button>
 
             <button
-              onClick={() => setListingType("service")}
+              onClick={() => router.push("/publier-service")}
               className="flex-1 rounded-2xl border border-black/10 bg-white p-6 text-left transition hover:border-[#00A651]/40 hover:shadow-md"
             >
               <span className="mb-2 block text-3xl">🛠️</span>
