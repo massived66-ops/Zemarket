@@ -10,6 +10,7 @@ export default function PublishPage() {
   const router = useRouter();
   const [checkingAuth, setCheckingAuth] = useState(true);
   const [userId, setUserId] = useState<string | null>(null);
+  const [listingType, setListingType] = useState<"produit" | "service" | null>(null);
   const [listingCount, setListingCount] = useState(0);
   const [isBoosted, setIsBoosted] = useState(false);
   const [userEmail, setUserEmail] = useState<string | null>(null);
@@ -120,6 +121,50 @@ export default function PublishPage() {
     return (
       <main className="flex min-h-screen items-center justify-center bg-[#F5F5F7]">
         <Loader2 className="h-6 w-6 animate-spin text-[#00A651]" />
+      </main>
+    );
+  }
+
+  if (!listingType) {
+    return (
+      <main className="flex min-h-screen items-center justify-center bg-[#F5F5F7] px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="mx-auto max-w-xl rounded-3xl border border-white/50 bg-white/70 p-8 backdrop-blur-xl shadow-xl sm:p-10"
+        >
+          <h1 className="mb-1 text-2xl font-bold tracking-tight text-[#1D1D1F]">
+            Que veux-tu publier ?
+          </h1>
+          <p className="mb-8 text-sm font-light text-[#1D1D1F]/50">
+            Choisis le type d'annonce que tu veux créer.
+          </p>
+
+          <div className="flex flex-col gap-4 sm:flex-row">
+            <button
+              onClick={() => setListingType("produit")}
+              className="flex-1 rounded-2xl border border-black/10 bg-white p-6 text-left transition hover:border-[#00A651]/40 hover:shadow-md"
+            >
+              <span className="mb-2 block text-3xl">📦</span>
+              <span className="block font-semibold text-[#1D1D1F]">Publier un produit</span>
+              <span className="mt-1 block text-sm font-light text-[#1D1D1F]/50">
+                Vends un objet, un article, un bien.
+              </span>
+            </button>
+
+            <button
+              onClick={() => setListingType("service")}
+              className="flex-1 rounded-2xl border border-black/10 bg-white p-6 text-left transition hover:border-[#00A651]/40 hover:shadow-md"
+            >
+              <span className="mb-2 block text-3xl">🛠️</span>
+              <span className="block font-semibold text-[#1D1D1F]">Proposer un service</span>
+              <span className="mt-1 block text-sm font-light text-[#1D1D1F]/50">
+                Propose ton savoir-faire ou ta prestation.
+              </span>
+            </button>
+          </div>
+        </motion.div>
       </main>
     );
   }
