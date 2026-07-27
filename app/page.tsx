@@ -712,6 +712,58 @@ function Categories() {
 </section>
 );
   }
+
+const PRO_CATEGORIES = [
+  { icon: "🏠", label: "Maison", query: "Maison" },
+  { icon: "🚗", label: "Automobile", query: "Automobile" },
+  { icon: "💄", label: "Beauté", query: "Beauté" },
+  { icon: "💻", label: "Informatique", query: "Informatique" },
+  { icon: "📷", label: "Événementiel", query: "Événementiel" },
+  { icon: "🔧", label: "Réparation", query: "Réparation" },
+];
+
+function FindProfessional() {
+  return (
+    <section className="px-4 py-20">
+      <div className="mx-auto max-w-6xl">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mb-10"
+        >
+          <h2 className="text-3xl font-bold tracking-tight text-[#1D1D1F]">
+            Trouver un professionnel
+          </h2>
+          <p className="mt-3 max-w-2xl text-[#1D1D1F]/60">
+            Peu importe ton besoin, trouve rapidement le bon prestataire près de chez toi.
+          </p>
+        </motion.div>
+
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6"
+        >
+          {PRO_CATEGORIES.map((cat) => (
+            <motion.a
+              key={cat.label}
+              href={`/recherche?q=${encodeURIComponent(cat.query)}`}
+              variants={fadeUp}
+              whileHover={{ y: -4, scale: 1.02 }}
+              className="flex flex-col items-center gap-3 rounded-3xl border border-white/50 bg-white/60 p-6 text-center backdrop-blur-xl shadow-sm transition-shadow duration-300 hover:shadow-lg"
+            >
+              <span className="text-4xl">{cat.icon}</span>
+              <span className="text-sm font-semibold text-[#1D1D1F]">{cat.label}</span>
+            </motion.a>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
 /* ------------------------------------------------------------------ */
 /*  FEATURED PRODUCTS                                                  */
 /* ------------------------------------------------------------------ */
