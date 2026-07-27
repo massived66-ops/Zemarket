@@ -185,6 +185,7 @@ function mapListingToProduct(row: any) {
     postedAt: timeAgo(row.created_at),
     image: row.image_url || "https://images.unsplash.com/photo-1607082349566-187342175e2f?w=800&q=80",
     phone: row.phone_number || null,
+    listingType: row.listing_type || "produit",
   };
 }
 
