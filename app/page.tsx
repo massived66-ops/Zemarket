@@ -838,6 +838,16 @@ function FeaturedProducts() {
             {product.price}
           </p>
 
+          <span
+            className={`inline-block rounded-full px-2.5 py-1 text-xs font-semibold ${
+              product.listingType === "service"
+                ? "bg-blue-50 text-blue-600"
+                : "bg-[#00A651]/10 text-[#00A651]"
+            }`}
+          >
+            {product.listingType === "service" ? "🛠️ Service" : "📦 Produit"}
+          </span>
+
           <div className="flex items-center gap-2 text-sm text-[#1D1D1F]/60">
             <MapPin className="h-4 w-4" />
             {product.city}
