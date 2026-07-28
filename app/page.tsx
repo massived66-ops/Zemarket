@@ -1075,9 +1075,47 @@ function HowItWorks() {
 /* ------------------------------------------------------------------ */
 
 function StatsSection() {
+  const [liveStats, setLiveStats] = useState([
+    { id: "s1", value: 0, suffix: "", label: "Annonces publiées" },
+    { id: "s2", value: 0, suffix: "", label: "Vendeurs actifs" },
+    { id: "s3", value: 0, suffix: "", label: "Villes couvertes" },
+    { id: "s4", value: 100, suffix: "%", label: "Publication gratuite" },
+  ]);
+
+  useEffect(() => {
+    async function loadStats() {
+      const { data } = await supabase.from("listings").select("user_id, city");
+      if (!data) return;
+
+      const totalListings = data.length;
+      const uniqueSellers = new Set(data.map((row) => row.user_id)).size;
+      const uniqueCities = new Set(data.map((row) => row.city)).size;
+
+      setLiveStats([
+        { id: "s1", value: totalListings, suffix: "", label: "Annonces publiées" },
+        { id: "s2", value: uniqueSellers, suffix: "", label: "Vendeurs actifs" },
+        { id: "s3", value: uniqueCities, suffix: "", label: "Villes couvertes" },
+        { id: "s4", value: 100, suffix: "%", label: "Publication gratuite" },
+      ]);
+    }
+    loadStats();
+  }, []);
+
   return (
     <section className="bg-[#00A651] px-4 py-24">
       <div className="mx-auto max-w-7xl">
+
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mb-12 text-center"
+        >
+          <span className="rounded-full bg-white/20 px-4 py-1.5 text-xs font-semibold text-white">
+            🚀 Plateforme en pleine croissance
+          </span>
+        </motion.div>
 
         <motion.div
           variants={staggerContainer}
@@ -1086,7 +1124,7 @@ function StatsSection() {
           viewport={{ once: true }}
           className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4"
         >
-          {STATS.map((stat) => (
+          {liveStats.map((stat) => (
             <motion.div
               key={stat.id}
               variants={fadeUp}
@@ -1107,7 +1145,7 @@ function StatsSection() {
       </div>
     </section>
   );
-              }
+    }
 /* ------------------------------------------------------------------ */
 /*  TESTIMONIALS                                                       */
 /* ------------------------------------------------------------------ */
