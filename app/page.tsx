@@ -955,7 +955,7 @@ function FeaturedProducts() {
 
             {product.phone ? (
               <a
-                href={`https://wa.me/${product.phone.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(
+                href={`https://wa.me/${formatWhatsAppNumber(product.phone)}?text=${encodeURIComponent(
                   `Bonjour, je suis intéressé(e) par votre annonce "${product.title}" sur ZeMarket.`
                 )}`}
                 target="_blank"
