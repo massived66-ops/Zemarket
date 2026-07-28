@@ -1503,6 +1503,7 @@ export default function Home() {
 
       <Categories />
       <FindProfessional />
+      <Pricing />
 
       <FeaturedProducts />
 
