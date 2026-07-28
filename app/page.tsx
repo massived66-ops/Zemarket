@@ -1443,46 +1443,26 @@ function Footer() {
             </li>
 
             <li>
-              <a href="#" className="transition hover:text-white">
+              <a href="/conditions" className="transition hover:text-white">
+                Conditions d'utilisation
+              </a>
+            </li>
+
+            <li>
+              <a href="/confidentialite" className="transition hover:text-white">
+                Politique de confidentialité
+              </a>
+            </li>
+
+            <li>
+              <a href="mailto:lakoujieedwing5@gmail.com" className="transition hover:text-white">
                 Assistance
               </a>
             </li>
           </ul>
         </div>
 
-        <div>
-          <h3 className="mb-5 text-lg font-semibold">
-            Suivez-nous
-          </h3>
-
-          <div className="flex gap-4">
-
-            <a
-              href="#"
-              className="flex h-12 w-12 items-center justify-center rounded-full bg-white/10 transition hover:bg-[#00A651]"
-            >
-              <Facebook className="h-5 w-5" />
-            </a>
-
-            <a
-              href="#"
-              className="flex h-12 w-12 items-center justify-center rounded-full bg-white/10 transition hover:bg-[#00A651]"
-            >
-              <Instagram className="h-5 w-5" />
-            </a>
-
-            <a
-              href="#"
-              className="flex h-12 w-12 items-center justify-center rounded-full bg-white/10 transition hover:bg-[#00A651]"
-            >
-              <Twitter className="h-5 w-5" />
-            </a>
-
-          </div>
-        </div>
-
       </div>
-
       <div className="mx-auto mt-16 max-w-7xl border-t border-white/10 pt-8 text-center text-sm text-white/60">
         © {new Date().getFullYear()} ZeMarket. Tous droits réservés.
       </div>
@@ -1630,12 +1610,9 @@ export default function Home() {
 
       <Testimonials />
 
-      <DownloadApp />
-
       <FAQ />
 
       <Footer />
-
     </main>
   );
 }
