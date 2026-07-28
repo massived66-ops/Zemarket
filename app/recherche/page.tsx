@@ -6,7 +6,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Loader2, MapPin, ArrowLeft } from "lucide-react";
 import { supabase } from "../../lib/supabaseClient";
-import { formatWhatsAppNumber } from "../lib/phone";
+import { formatWhatsAppNumber } from "../../lib/phone";
 
 type Result = {
   id: string;
