@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Loader2, MapPin, ArrowLeft } from "lucide-react";
 import { supabase } from "../../lib/supabaseClient";
+import { formatWhatsAppNumber } from "../lib/phone";
 
 type Result = {
   id: string;
@@ -120,10 +121,7 @@ function RechercheContent() {
                   </div>
                   {item.phone_number && (
                     <a
-                      href={`https://wa.me/${item.phone_number.replace(
-                        /[^0-9]/g,
-                        ""
-                      )}?text=${encodeURIComponent(
+                      href={`https://wa.me/${formatWhatsAppNumber(item.phone_number)}?text=${encodeURIComponent(
                         `Bonjour, je suis intéressé(e) par votre service "${item.title}" sur ZeMarket.`
                       )}`}
                       target="_blank"
