@@ -785,6 +785,23 @@ function FeaturedProducts() {
   const [listings, setListings] = useState<any[]>([]);
 
   useEffect(() => {
+    async function loadFavorites() {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+      if (!session) return;
+
+      const { data } = await supabase
+        .from("favorites")
+        .select("listing_id")
+        .eq("user_id", session.user.id);
+
+      if (data) setFavorites(data.map((f) => f.listing_id));
+    }
+    loadFavorites();
+  }, []);
+
+  useEffect(() => {
     async function loadListings() {
       const { data } = await supabase
         .from("listings")
@@ -821,11 +838,32 @@ function FeaturedProducts() {
     loadListings();
   }, []);
   const toggleFavorite = (id: string) => {
+  const toggleFavorite = async (id: string) => {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+
+    if (!session) {
+      window.location.href = "/login";
+      return;
+    }
+
     const exists = favorites.includes(id);
 
-    setFavorites((prev) =>
-      exists ? prev.filter((item) => item !== id) : [...prev, id]
-    );
+    if (exists) {
+      await supabase
+        .from("favorites")
+        .delete()
+        .eq("user_id", session.user.id)
+        .eq("listing_id", id);
+      setFavorites((prev) => prev.filter((item) => item !== id));
+    } else {
+      await supabase.from("favorites").insert({
+        user_id: session.user.id,
+        listing_id: id,
+      });
+      setFavorites((prev) => [...prev, id]);
+    }
 
     setToast({
       id: Date.now(),
