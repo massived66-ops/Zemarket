@@ -829,7 +829,7 @@ function FeaturedProducts() {
   };
 
   return (
-    <section className="bg-[#F8F9FB] px-4 py-24">
+    <section id="annonces" className="bg-[#F8F9FB] px-4 py-24">
       <div className="mx-auto max-w-7xl">
 
         <motion.div
