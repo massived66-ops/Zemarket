@@ -1150,8 +1150,25 @@ function StatsSection() {
 /* ------------------------------------------------------------------ */
 /*  TESTIMONIALS                                                       */
 /* ------------------------------------------------------------------ */
-
 function Testimonials() {
+  const reasons = [
+    {
+      icon: "🆓",
+      title: "100% gratuit pour commencer",
+      description: "Publie tes 10 premières annonces sans payer un centime.",
+    },
+    {
+      icon: "🛡️",
+      title: "Vérification manuelle",
+      description: "Chaque badge Vérifié est examiné personnellement, pas juste automatisé.",
+    },
+    {
+      icon: "💬",
+      title: "Contact direct",
+      description: "Discute directement avec le vendeur via WhatsApp, sans intermédiaire.",
+    },
+  ];
+
   return (
     <section className="bg-[#F8F9FB] px-4 py-24">
       <div className="mx-auto max-w-7xl">
@@ -1164,11 +1181,11 @@ function Testimonials() {
           className="mx-auto mb-16 max-w-3xl text-center"
         >
           <h2 className="text-4xl font-bold tracking-tight text-[#1D1D1F]">
-            Ce que disent nos utilisateurs
+            Pourquoi choisir ZeMarket
           </h2>
 
           <p className="mt-4 text-lg text-[#1D1D1F]/60">
-            Des milliers de Camerounais utilisent déjà ZeMarket chaque jour.
+            Une plateforme pensée pour les vendeurs et acheteurs camerounais.
           </p>
         </motion.div>
 
@@ -1179,46 +1196,16 @@ function Testimonials() {
           viewport={{ once: true }}
           className="grid gap-8 md:grid-cols-3"
         >
-          {TESTIMONIALS.map((testimonial) => (
+          {reasons.map((reason) => (
             <motion.div
-              key={testimonial.id}
+              key={reason.title}
               variants={fadeUp}
               whileHover={{ y: -6 }}
               className="rounded-3xl bg-white p-8 shadow-lg"
             >
-              <div className="mb-6 flex">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <Star
-                    key={star}
-                    className="h-5 w-5 fill-yellow-400 text-yellow-400"
-                  />
-                ))}
-              </div>
-
-              <p className="leading-7 text-[#1D1D1F]/70">
-                "{testimonial.comment}"
-              </p>
-
-              <div className="mt-8 flex items-center gap-4">
-                <Image
-                  src={testimonial.avatar}
-                  alt={testimonial.name}
-                  width={56}
-                  height={56}
-                  unoptimized
-                  className="rounded-full object-cover"
-                />
-
-                <div>
-                  <h4 className="font-semibold text-[#1D1D1F]">
-                    {testimonial.name}
-                  </h4>
-
-                  <p className="text-sm text-[#1D1D1F]/55">
-                    {testimonial.city}
-                  </p>
-                </div>
-              </div>
+              <span className="mb-4 block text-4xl">{reason.icon}</span>
+              <h3 className="mb-2 text-lg font-semibold text-[#1D1D1F]">{reason.title}</h3>
+              <p className="leading-7 text-[#1D1D1F]/60">{reason.description}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -1226,7 +1213,8 @@ function Testimonials() {
       </div>
     </section>
   );
-          }
+      }
+
 /* ------------------------------------------------------------------ */
 /*  DOWNLOAD APP                                                       */
 /* ------------------------------------------------------------------ */
