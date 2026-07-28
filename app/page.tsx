@@ -1493,6 +1493,123 @@ function Footer() {
 /*  HOME PAGE                                                          */
 /* ------------------------------------------------------------------ */
 
+function Pricing() {
+  const plans = [
+    {
+      name: "Gratuit",
+      price: "0 FCFA",
+      description: "Pour découvrir ZeMarket et publier tes premières annonces.",
+      features: [
+        "Jusqu'à 10 annonces (produits ou services)",
+        "Contact direct via WhatsApp",
+        "Vérification d'identité possible",
+        "Visible dans les résultats de recherche",
+      ],
+      cta: "Commencer gratuitement",
+      href: "/publier",
+      highlighted: false,
+    },
+    {
+      name: "Boost",
+      price: "5 000 FCFA / mois",
+      description: "Pour les vendeurs qui veulent plus de visibilité.",
+      features: [
+        "Annonces illimitées",
+        "Priorité dans les résultats de recherche",
+        "Badge mis en avant",
+        "Toutes les fonctionnalités du compte Gratuit",
+      ],
+      cta: "Devenir Boosté",
+      href: "/verification",
+      highlighted: true,
+    },
+  ];
+
+  return (
+    <section className="px-4 py-24">
+      <div className="mx-auto max-w-5xl">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mb-14 text-center"
+        >
+          <h2 className="text-3xl font-bold tracking-tight text-[#1D1D1F] sm:text-4xl">
+            Nos offres
+          </h2>
+          <p className="mx-auto mt-3 max-w-xl text-[#1D1D1F]/60">
+            Commence gratuitement, passe au Boost quand tu es prêt à vendre plus vite.
+          </p>
+        </motion.div>
+
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid gap-6 sm:grid-cols-2"
+        >
+          {plans.map((plan) => (
+            <motion.div
+              key={plan.name}
+              variants={fadeUp}
+              whileHover={{ y: -6 }}
+              className={`rounded-3xl p-8 ${
+                plan.highlighted
+                  ? "bg-[#1D1D1F] text-white shadow-xl"
+                  : "border border-black/10 bg-white"
+              }`}
+            >
+              <h3 className={`text-xl font-bold ${plan.highlighted ? "text-white" : "text-[#1D1D1F]"}`}>
+                {plan.name}
+              </h3>
+              <p
+                className={`mt-2 text-2xl font-bold ${
+                  plan.highlighted ? "text-[#00A651]" : "text-[#00A651]"
+                }`}
+              >
+                {plan.price}
+              </p>
+              <p
+                className={`mt-2 text-sm font-light ${
+                  plan.highlighted ? "text-white/60" : "text-[#1D1D1F]/50"
+                }`}
+              >
+                {plan.description}
+              </p>
+
+              <ul className="mt-6 flex flex-col gap-3">
+                {plan.features.map((feature) => (
+                  <li
+                    key={feature}
+                    className={`flex items-start gap-2 text-sm ${
+                      plan.highlighted ? "text-white/80" : "text-[#1D1D1F]/70"
+                    }`}
+                  >
+                    <span className="mt-0.5 text-[#00A651]">✓</span>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+
+              <a
+                href={plan.href}
+                className={`mt-8 block rounded-full py-3 text-center text-sm font-semibold transition ${
+                  plan.highlighted
+                    ? "bg-[#00A651] text-white hover:opacity-90"
+                    : "bg-[#1D1D1F]/5 text-[#1D1D1F] hover:bg-[#1D1D1F]/10"
+                }`}
+              >
+                {plan.cta}
+              </a>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+}
 export default function Home() {
   return (
     <main className="min-h-screen overflow-x-hidden bg-white text-[#1D1D1F]">
