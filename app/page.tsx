@@ -352,6 +352,7 @@ function Header() {
   };
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -381,14 +382,24 @@ function Header() {
           </span>
         </a>
 
-        <div className="relative hidden flex-1 max-w-md items-center md:flex">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (searchQuery.trim()) {
+              window.location.href = `/recherche?q=${encodeURIComponent(searchQuery.trim())}`;
+            }
+          }}
+          className="relative hidden flex-1 max-w-md items-center md:flex"
+        >
           <Search className="pointer-events-none absolute left-4 h-4 w-4 text-[#1D1D1F]/40" />
           <input
             type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Rechercher un produit, une ville..."
             className="w-full rounded-full border border-black/5 bg-white/80 py-2.5 pl-11 pr-4 text-sm text-[#1D1D1F] placeholder:text-[#1D1D1F]/40 outline-none transition focus:border-[#00A651]/40 focus:ring-2 focus:ring-[#00A651]/20"
           />
-        </div>
+        </form>
 
         <div className="hidden shrink-0 items-center gap-2 md:flex">
           {user ? (
