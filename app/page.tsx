@@ -837,7 +837,6 @@ function FeaturedProducts() {
 
     loadListings();
   }, []);
-  const toggleFavorite = (id: string) => {
   const toggleFavorite = async (id: string) => {
     const {
       data: { session },
