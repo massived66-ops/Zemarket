@@ -511,10 +511,10 @@ function Header() {
 /* ------------------------------------------------------------------ */
 
 const HERO_STATS = [
-  { label: "annonces", value: "+250 000" },
-  { label: "vendeurs", value: "+35 000" },
-  { label: "régions couvertes", value: "10" },
-  { label: "satisfaction", value: "4.9/5" },
+  { label: "gratuit à publier", value: "100%" },
+  { label: "vérification manuelle", value: "✓" },
+  { label: "contact direct", value: "WhatsApp" },
+  { label: "nouveau", value: "🚀" },
 ];
 
 function Hero() {
