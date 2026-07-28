@@ -667,7 +667,7 @@ function Categories() {
 </div>
 
 <a
-  href="#"
+  href="#annonces"
   className="hidden items-center gap-2 text-sm font-semibold text-[#00A651] transition hover:gap-3 md:flex"
 >
   Voir toutes
@@ -686,12 +686,13 @@ function Categories() {
     const Icon = category.icon;
 
     return (
-      <motion.div
+      <motion.a
         key={category.id}
+        href={`/recherche?q=${encodeURIComponent(category.label)}`}
         variants={fadeUp}
         whileHover={{ y: -8, scale: 1.03 }}
         transition={{ duration: 0.3 }}
-        className="group cursor-pointer rounded-3xl border border-white/50 bg-white p-6 shadow-lg transition hover:shadow-2xl"
+        className="group block cursor-pointer rounded-3xl border border-white/50 bg-white p-6 shadow-lg transition hover:shadow-2xl"
       >
         <div
           className="mb-5 flex h-16 w-16 items-center justify-center rounded-2xl"
@@ -709,15 +710,11 @@ function Categories() {
           {category.label}
         </h3>
 
-        <p className="mt-2 text-sm text-[#1D1D1F]/55">
-          {category.count} annonces
-        </p>
-
         <div className="mt-5 flex items-center gap-2 text-sm font-medium text-[#00A651] opacity-0 transition group-hover:opacity-100">
           Explorer
           <ArrowRight className="h-4 w-4" />
         </div>
-      </motion.div>
+      </motion.a>
     );
   })}
 </motion.div>
