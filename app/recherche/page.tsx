@@ -15,6 +15,7 @@ type Result = {
   image_url: string | null;
   phone_number: string | null;
   category: string | null;
+  listing_type: string | null;
 };
 
 function RechercheContent() {
@@ -29,10 +30,9 @@ function RechercheContent() {
       setLoading(true);
       const { data } = await supabase
         .from("listings")
-        .select("id, title, price, city, image_url, phone_number, category")
-        .eq("listing_type", "service")
+        .select("id, title, price, city, image_url, phone_number, category, listing_type")
         .or(
-          `title.ilike.%${query}%,category.ilike.%${query}%,subcategory.ilike.%${query}%,description.ilike.%${query}%`
+          `title.ilike.%${query}%,category.ilike.%${query}%,subcategory.ilike.%${query}%,description.ilike.%${query}%,city.ilike.%${query}%`
         )
         .order("created_at", { ascending: false });
 
@@ -101,8 +101,14 @@ function RechercheContent() {
                       className="h-full w-full object-cover"
                     />
                   ) : null}
-                  <span className="absolute left-3 top-3 rounded-full bg-blue-50 px-2.5 py-1 text-xs font-semibold text-blue-600">
-                    🛠️ Service
+                  <span
+                    className={`absolute left-3 top-3 rounded-full px-2.5 py-1 text-xs font-semibold ${
+                      item.listing_type === "service"
+                        ? "bg-blue-50 text-blue-600"
+                        : "bg-[#00A651]/10 text-[#00A651]"
+                    }`}
+                  >
+                    {item.listing_type === "service" ? "🛠️ Service" : "📦 Produit"}
                   </span>
                 </div>
                 <div className="p-5">
