@@ -567,14 +567,15 @@ function Hero() {
           >
             Commencer à vendre
           </Link>
-          <motion.button
+          <motion.a
+            href="#annonces"
             whileHover={{ scale: 1.04, y: -2 }}
             whileTap={{ scale: 0.97 }}
             onClick={createRipple}
             className="flex items-center justify-center gap-2 rounded-full border border-black/10 bg-white/70 px-8 py-3.5 text-sm font-semibold text-[#1D1D1F] backdrop-blur-xl outline-none transition hover:bg-white focus-visible:ring-2 focus-visible:ring-[#00A651] focus-visible:ring-offset-2"
           >
             Explorer <ArrowRight className="h-4 w-4" />
-          </motion.button>
+          </motion.a>
         </motion.div>
 
         <motion.div
