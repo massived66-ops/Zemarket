@@ -1431,18 +1431,7 @@ function Footer() {
             </li>
 
             <li>
-              <a href="#" className="transition hover:text-white">
-                Conditions d'utilisation
-              </a>
-            </li>
-
-            <li>
-              <a href="#" className="transition hover:text-white">
-                Politique de confidentialité
-              </a>
-            </li>
-
-            <li>
+              
               <a href="/conditions" className="transition hover:text-white">
                 Conditions d'utilisation
               </a>
