@@ -417,6 +417,12 @@ function Header() {
               >
                 Tableau de bord
               </Link>
+              <Link
+                href="/favoris"
+                className="rounded-full px-4 py-2 text-sm font-medium text-[#1D1D1F] transition hover:bg-black/5"
+              >
+                Mes favoris
+              </Link>
               <span className="max-w-[140px] truncate rounded-full px-4 py-2 text-sm font-medium text-[#1D1D1F]/70">
                 {user.email}
               </span>
