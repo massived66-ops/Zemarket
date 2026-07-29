@@ -23,7 +23,13 @@ export default function LoginPage() {
     setLoading(true);
 
     if (mode === "signup") {
-      const { error } = await supabase.auth.signUp({ email, password });
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          emailRedirectTo: `${window.location.origin}/login?confirme=1`,
+        },
+      });
       setLoading(false);
       if (error) {
         setError(error.message);
