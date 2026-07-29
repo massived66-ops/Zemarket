@@ -91,6 +91,12 @@ export default function LoginPage() {
           </button>
         </div>
 
+        {emailConfirmed && (
+          <p className="mb-6 rounded-xl bg-[#00A651]/10 px-4 py-3 text-sm text-[#00A651]">
+            ✓ Email confirmé avec succès. Connecte-toi maintenant.
+          </p>
+        )}
+
         <h1 className="mb-1 text-2xl font-bold tracking-tight text-[#1D1D1F]">
           {mode === "login" ? "Content de te revoir" : "Rejoins ZeMarket"}
         </h1>
