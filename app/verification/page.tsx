@@ -30,6 +30,18 @@ export default function VerificationPage() {
       const uid = data.session.user.id;
       setUserId(uid);
 
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("is_verified")
+        .eq("id", uid)
+        .maybeSingle();
+
+      if (profile?.is_verified) {
+        setExistingStatus("approuvé");
+        setCheckingAuth(false);
+        return;
+      }
+
       const { data: existing } = await supabase
         .from("verification_requests")
         .select("status")
