@@ -8,6 +8,8 @@ import { supabase } from "../../lib/supabaseClient";
 
 export default function LoginPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const emailConfirmed = searchParams.get("confirme") === "1";
   const [mode, setMode] = useState<"login" | "signup">("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
