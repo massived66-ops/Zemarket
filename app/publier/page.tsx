@@ -106,6 +106,7 @@ export default function PublishPage() {
         image_url: imageUrl,
         seller_email: userEmail,
         phone_number: phone,
+        category,
       });
 
       if (insertError) throw insertError;
