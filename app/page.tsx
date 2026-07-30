@@ -530,8 +530,16 @@ function Header() {
                   >
                     Mon profil
                   </Link>
-                  <span className="truncate rounded-xl px-4 py-2.5 text-sm font-medium text-[#1D1D1F]/70">
-                    {user.email}
+                  <span className="flex items-center gap-2 truncate rounded-xl px-4 py-2.5 text-sm font-medium text-[#1D1D1F]/70">
+                    {profile?.avatar_url ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={profile.avatar_url}
+                        alt="Profil"
+                        className="h-7 w-7 rounded-full object-cover"
+                      />
+                    ) : null}
+                    {profile?.full_name || user.email}
                   </span>
                   <button
                     onClick={handleLogout}
