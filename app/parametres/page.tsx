@@ -227,6 +227,32 @@ export default function ParametresPage() {
               rows={3}
               className="w-full rounded-2xl border border-black/10 bg-white px-4 py-3.5 text-sm outline-none transition focus:border-[#00A651]/40 focus:ring-2 focus:ring-[#00A651]/20"
             />
+            <label className="relative flex h-28 cursor-pointer flex-col items-center justify-center overflow-hidden rounded-2xl border-2 border-dashed border-black/10 bg-white">
+              {bannerPreview || bannerUrl ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={bannerPreview || bannerUrl || ""}
+                  alt="Bannière"
+                  className="h-full w-full object-cover"
+                />
+              ) : (
+                <span className="text-sm text-[#1D1D1F]/40">Ajouter une bannière</span>
+              )}
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleBannerChange}
+                className="hidden"
+              />
+            </label>
+
+            <input
+              type="text"
+              value={hours}
+              onChange={(e) => setHours(e.target.value)}
+              placeholder="Horaires (ex: Lun-Sam, 8h-18h)"
+              className="w-full rounded-2xl border border-black/10 bg-white px-4 py-3.5 text-sm outline-none transition focus:border-[#00A651]/40 focus:ring-2 focus:ring-[#00A651]/20"
+            />
 
             {error && (
               <p className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-600">{error}</p>
