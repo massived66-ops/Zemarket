@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { Mail, Lock, Loader2, Eye, EyeOff } from "lucide-react";
 import { supabase } from "../../lib/supabaseClient";
 
-export default function LoginPage() {
+function LoginContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const emailConfirmed = searchParams.get("confirme") === "1";
@@ -161,3 +161,16 @@ export default function LoginPage() {
     </main>
   );
             }
+export default function LoginPage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="flex min-h-screen items-center justify-center bg-[#F5F5F7]">
+          <Loader2 className="h-6 w-6 animate-spin text-[#00A651]" />
+        </main>
+      }
+    >
+      <LoginContent />
+    </Suspense>
+  );
+}
