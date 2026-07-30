@@ -29,6 +29,8 @@ export default function VendeurProfilePage() {
     bio: string | null;
     is_verified: boolean;
     is_boosted: boolean;
+    hours: string | null;
+    banner_url: string | null;
   } | null>(null);
   const [listings, setListings] = useState<Listing[]>([]);
 
@@ -36,7 +38,7 @@ export default function VendeurProfilePage() {
     async function load() {
       const { data: profileData } = await supabase
         .from("profiles")
-        .select("full_name, avatar_url, bio, is_verified, is_boosted")
+        .select("full_name, avatar_url, bio, is_verified, is_boosted, hours, banner_url")
         .eq("id", sellerId)
         .maybeSingle();
 
