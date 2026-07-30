@@ -1021,9 +1021,9 @@ function FeaturedProducts() {
 
             <div className="flex items-center gap-2">
 
-              <span className="text-sm font-medium">
+              <Link href={`/vendeur/${product.sellerId}`} className="text-sm font-medium hover:underline">
                 {product.seller}
-              </span>
+              </Link>
 
               {product.verified && (
                 <BadgeCheck className="h-4 w-4 text-[#00A651]" />
