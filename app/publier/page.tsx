@@ -19,6 +19,7 @@ export default function PublishPage() {
   const [price, setPrice] = useState("");
   const [city, setCity] = useState("");
   const [phone, setPhone] = useState("");
+  const [category, setCategory] = useState("Téléphones");
   const [description, setDescription] = useState("");
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
