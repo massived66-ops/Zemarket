@@ -438,8 +438,18 @@ function Header() {
               >
                 Mon profil
               </Link>
-              <span className="max-w-[140px] truncate rounded-full px-4 py-2 text-sm font-medium text-[#1D1D1F]/70">
-                {user.email}
+              <span className="flex items-center gap-2 rounded-full px-2 py-1 text-sm font-medium text-[#1D1D1F]/70">
+                {profile?.avatar_url ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={profile.avatar_url}
+                    alt="Profil"
+                    className="h-7 w-7 rounded-full object-cover"
+                  />
+                ) : null}
+                <span className="max-w-[120px] truncate">
+                  {profile?.full_name || user.email}
+                </span>
               </span>
               <button
                 onClick={handleLogout}
