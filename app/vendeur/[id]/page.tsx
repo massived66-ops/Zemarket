@@ -128,6 +128,13 @@ export default function VendeurProfilePage() {
           {profile?.bio && (
             <p className="mt-6 leading-7 text-[#1D1D1F]/70">{profile.bio}</p>
           )}
+
+          {profile?.hours && (
+            <p className="mt-3 text-sm font-medium text-[#1D1D1F]/60">
+              🕒 {profile.hours}
+            </p>
+          )}
+          </div>
         </motion.div>
 
         <h2 className="mb-6 mt-10 text-lg font-semibold text-[#1D1D1F]">
