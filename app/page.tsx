@@ -331,11 +331,20 @@ function Toast({ toast }: { toast: ToastState }) {
 /* ------------------------------------------------------------------ */
 
 function Header() {
-  const [user, setUser] = useState<{ email?: string } | null>(null);
+  const [user, setUser] = useState<{ email?: string; id?: string } | null>(null);
+  const [profile, setProfile] = useState<{ full_name: string | null; avatar_url: string | null } | null>(null);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => {
+    supabase.auth.getSession().then(async ({ data }) => {
       setUser(data.session?.user ?? null);
+      if (data.session?.user) {
+        const { data: profileData } = await supabase
+          .from("profiles")
+          .select("full_name, avatar_url")
+          .eq("id", data.session.user.id)
+          .maybeSingle();
+        setProfile(profileData);
+      }
     });
 
     const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
