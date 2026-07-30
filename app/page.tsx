@@ -1547,7 +1547,7 @@ function Pricing() {
         "Toutes les fonctionnalités du compte Gratuit",
       ],
       cta: "Devenir Boosté",
-      href: "/verification",
+      href: "https://wa.me/237687542666?text=Bonjour%2C%20je%20veux%20devenir%20Boost%C3%A9%20sur%20ZeMarket",
       highlighted: true,
     },
   ];
