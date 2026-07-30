@@ -36,7 +36,7 @@ export default function VendeurProfilePage() {
     async function load() {
       const { data: profileData } = await supabase
         .from("profiles")
-        .select("full_name, avatar_url, bio, is_verified")
+        .select("full_name, avatar_url, bio, is_verified, is_boosted")
         .eq("id", sellerId)
         .maybeSingle();
 
