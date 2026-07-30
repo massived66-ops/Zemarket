@@ -41,7 +41,7 @@ export default function ParametresPage() {
 
       const { data: profile } = await supabase
         .from("profiles")
-        .select("full_name, avatar_url, bio")
+        .select("full_name, avatar_url, bio, hours, banner_url")
         .eq("id", uid)
         .maybeSingle();
 
