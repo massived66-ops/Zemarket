@@ -182,6 +182,7 @@ function mapListingToProduct(row: any) {
     price: row.price,
     city: row.city,
     seller: row.seller_email ? row.seller_email.split("@")[0] : "Vendeur ZeMarket",
+    sellerId: row.user_id,
     verified: false,
     postedAt: timeAgo(row.created_at),
     image: row.image_url || "https://images.unsplash.com/photo-1607082349566-187342175e2f?w=800&q=80",
