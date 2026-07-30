@@ -117,18 +117,40 @@ export default function ParametresPage() {
         finalAvatarUrl = publicUrlData.publicUrl;
       }
 
+      let finalBannerUrl = bannerUrl;
+
+      if (bannerFile) {
+        const ext = bannerFile.name.split(".").pop();
+        const path = `banners/${userId}-${Date.now()}.${ext}`;
+
+        const { error: uploadError } = await supabase.storage
+          .from("listings-images")
+          .upload(path, bannerFile);
+
+        if (uploadError) throw uploadError;
+
+        const { data: publicUrlData } = supabase.storage
+          .from("listings-images")
+          .getPublicUrl(path);
+
+        finalBannerUrl = publicUrlData.publicUrl;
+      }
+
       const { error: updateError } = await supabase
         .from("profiles")
         .update({
           full_name: fullName,
           bio,
           avatar_url: finalAvatarUrl,
+          hours,
+          banner_url: finalBannerUrl,
         })
         .eq("id", userId);
 
       if (updateError) throw updateError;
 
       setAvatarUrl(finalAvatarUrl);
+      setBannerUrl(finalBannerUrl);
       setSuccess(true);
     } catch (err: any) {
       setError(err.message ?? "Une erreur est survenue. Réessaie.");
