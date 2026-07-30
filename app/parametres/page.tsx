@@ -49,7 +49,9 @@ export default function ParametresPage() {
         setFullName(profile.full_name || "");
         setBio(profile.bio || "");
         setAvatarUrl(profile.avatar_url || null);
-      }
+        setHours(profile.hours || "");
+        setBannerUrl(profile.banner_url || null);
+                                    }
 
       setCheckingAuth(false);
     });
