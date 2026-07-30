@@ -138,26 +138,55 @@ function LoginContent() {
             />
           </div>
 
-          <div className="relative">
-            <Lock className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#1D1D1F]/40" />
-            <input
-              type={showPassword ? "text" : "password"}
-              required
-              minLength={6}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Mot de passe"
-              className="w-full rounded-2xl border border-black/10 bg-white py-3.5 pl-11 pr-11 text-sm outline-none transition focus:border-[#00A651]/40 focus:ring-2 focus:ring-[#00A651]/20"
-            />
+          {!resetMode && (
+            <div className="relative">
+              <Lock className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#1D1D1F]/40" />
+              <input
+                type={showPassword ? "text" : "password"}
+                required
+                minLength={6}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Mot de passe"
+                className="w-full rounded-2xl border border-black/10 bg-white py-3.5 pl-11 pr-11 text-sm outline-none transition focus:border-[#00A651]/40 focus:ring-2 focus:ring-[#00A651]/20"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword((v) => !v)}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-[#1D1D1F]/40"
+              >
+                {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+              </button>
+            </div>
+          )}
+
+          {mode === "login" && !resetMode && (
             <button
               type="button"
-              onClick={() => setShowPassword((v) => !v)}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-[#1D1D1F]/40"
+              onClick={() => {
+                setResetMode(true);
+                setError(null);
+                setMessage(null);
+              }}
+              className="text-left text-sm font-medium text-[#00A651]"
             >
-              {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+              Mot de passe oublié ?
             </button>
-          </div>
+          )}
 
+          {resetMode && (
+            <button
+              type="button"
+              onClick={() => {
+                setResetMode(false);
+                setError(null);
+                setMessage(null);
+              }}
+              className="text-left text-sm font-medium text-[#1D1D1F]/60"
+            >
+              ← Retour à la connexion
+            </button>
+          )}
           {error && (
             <p className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-600">{error}</p>
           )}
