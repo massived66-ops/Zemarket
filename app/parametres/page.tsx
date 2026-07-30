@@ -212,8 +212,54 @@ export default function ParametresPage() {
             </button>
           </form>
         </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="mt-6 rounded-3xl border border-white/50 bg-white/70 p-8 backdrop-blur-xl shadow-xl sm:p-10"
+        >
+          <h2 className="mb-1 text-xl font-bold tracking-tight text-[#1D1D1F]">
+            Changer le mot de passe
+          </h2>
+          <p className="mb-6 text-sm font-light text-[#1D1D1F]/50">
+            Choisis un nouveau mot de passe pour ton compte.
+          </p>
+
+          <form onSubmit={handlePasswordChange} className="flex flex-col gap-4">
+            <input
+              type="password"
+              required
+              minLength={6}
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              placeholder="Nouveau mot de passe"
+              className="w-full rounded-2xl border border-black/10 bg-white px-4 py-3.5 text-sm outline-none transition focus:border-[#00A651]/40 focus:ring-2 focus:ring-[#00A651]/20"
+            />
+
+            {passwordError && (
+              <p className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-600">
+                {passwordError}
+              </p>
+            )}
+            {passwordSuccess && (
+              <p className="rounded-xl bg-[#00A651]/10 px-4 py-3 text-sm text-[#00A651]">
+                ✓ Mot de passe mis à jour.
+              </p>
+            )}
+
+            <button
+              type="submit"
+              disabled={passwordSaving}
+              className="flex items-center justify-center gap-2 rounded-full bg-[#1D1D1F] py-3.5 text-sm font-semibold text-white transition hover:opacity-90 disabled:opacity-60"
+            >
+              {passwordSaving && <Loader2 className="h-4 w-4 animate-spin" />}
+              {passwordSaving ? "Mise à jour..." : "Changer le mot de passe"}
+            </button>
+          </form>
+        </motion.div>
       </div>
     </main>
   );
-      }
+}
         
