@@ -423,6 +423,12 @@ function Header() {
               >
                 Mes favoris
               </Link>
+              <Link
+                href="/parametres"
+                className="rounded-full px-4 py-2 text-sm font-medium text-[#1D1D1F] transition hover:bg-black/5"
+              >
+                Mon profil
+              </Link>
               <span className="max-w-[140px] truncate rounded-full px-4 py-2 text-sm font-medium text-[#1D1D1F]/70">
                 {user.email}
               </span>
