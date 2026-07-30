@@ -14,6 +14,10 @@ export default function ParametresPage() {
 
   const [fullName, setFullName] = useState("");
   const [bio, setBio] = useState("");
+  const [hours, setHours] = useState("");
+  const [bannerUrl, setBannerUrl] = useState<string | null>(null);
+  const [bannerFile, setBannerFile] = useState<File | null>(null);
+  const [bannerPreview, setBannerPreview] = useState<string | null>(null);
   const [newPassword, setNewPassword] = useState("");
   const [passwordSaving, setPasswordSaving] = useState(false);
   const [passwordError, setPasswordError] = useState<string | null>(null);
