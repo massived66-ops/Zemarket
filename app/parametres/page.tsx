@@ -59,6 +59,23 @@ export default function ParametresPage() {
     }
   };
 
+  const handlePasswordChange = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setPasswordSaving(true);
+    setPasswordError(null);
+    setPasswordSuccess(false);
+
+    const { error } = await supabase.auth.updateUser({ password: newPassword });
+
+    setPasswordSaving(false);
+
+    if (error) {
+      setPasswordError(error.message);
+    } else {
+      setPasswordSuccess(true);
+      setNewPassword("");
+    }
+  };
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!userId) return;
