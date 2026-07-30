@@ -218,14 +218,20 @@ export default function PublishPage() {
             className="w-full rounded-2xl border border-black/10 bg-white px-4 py-3.5 text-sm outline-none transition focus:border-[#00A651]/40 focus:ring-2 focus:ring-[#00A651]/20"
           />
 
-          <input
-            type="text"
-            required
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-            placeholder="Ville"
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
             className="w-full rounded-2xl border border-black/10 bg-white px-4 py-3.5 text-sm outline-none transition focus:border-[#00A651]/40 focus:ring-2 focus:ring-[#00A651]/20"
-          />
+          >
+            <option value="Téléphones">Téléphones</option>
+            <option value="Ordinateurs">Ordinateurs</option>
+            <option value="Voitures">Voitures</option>
+            <option value="Immobilier">Immobilier</option>
+            <option value="Mode">Mode</option>
+            <option value="Emplois">Emplois</option>
+            <option value="Vélos & Motos">Vélos & Motos</option>
+            <option value="Autres">Autres</option>
+          </select>
           <input
             type="tel"
             required
