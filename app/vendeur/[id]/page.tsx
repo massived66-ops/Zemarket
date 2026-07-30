@@ -79,8 +79,18 @@ export default function VendeurProfilePage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="rounded-3xl border border-white/50 bg-white/70 p-8 backdrop-blur-xl shadow-xl"
+          className="overflow-hidden rounded-3xl border border-white/50 bg-white/70 backdrop-blur-xl shadow-xl"
         >
+          {profile?.banner_url && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={profile.banner_url}
+              alt="Bannière"
+              className="h-32 w-full object-cover sm:h-40"
+            />
+          )}
+
+          <div className="p-8">
           <div className="flex items-center gap-4">
             <div className="flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-full bg-black/5">
               {profile?.avatar_url ? (
