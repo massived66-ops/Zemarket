@@ -28,6 +28,7 @@ export default function VendeurProfilePage() {
     avatar_url: string | null;
     bio: string | null;
     is_verified: boolean;
+    is_boosted: boolean;
   } | null>(null);
   const [listings, setListings] = useState<Listing[]>([]);
 
