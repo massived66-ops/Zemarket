@@ -202,7 +202,11 @@ function LoginContent() {
             className="mt-2 flex items-center justify-center gap-2 rounded-full bg-[#00A651] py-3.5 text-sm font-semibold text-white shadow-md shadow-[#00A651]/25 transition hover:shadow-lg disabled:opacity-60"
           >
             {loading && <Loader2 className="h-4 w-4 animate-spin" />}
-            {mode === "login" ? "Se connecter" : "Créer mon compte"}
+            {resetMode
+              ? "Envoyer le lien de réinitialisation"
+              : mode === "login"
+              ? "Se connecter"
+              : "Créer mon compte"}
           </button>
         </form>
       </motion.div>
