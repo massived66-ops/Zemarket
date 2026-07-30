@@ -101,6 +101,11 @@ export default function VendeurProfilePage() {
                 {profile?.is_verified && (
                   <BadgeCheck className="h-5 w-5 text-[#00A651]" />
                 )}
+                {profile?.is_boosted && (
+                  <span className="rounded-full bg-amber-100 px-2.5 py-1 text-xs font-semibold text-amber-700">
+                    ⚡ Boosté
+                  </span>
+                )}
               </div>
               <p className="text-sm font-light text-[#1D1D1F]/50">
                 {listings.length} annonce(s) publiée(s)
