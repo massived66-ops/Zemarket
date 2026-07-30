@@ -91,49 +91,49 @@ export default function VendeurProfilePage() {
           )}
 
           <div className="p-8">
-          <div className="flex items-center gap-4">
-            <div className="flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-full bg-black/5">
-              {profile?.avatar_url ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={profile.avatar_url}
-                  alt={profile.full_name || "Vendeur"}
-                  className="h-full w-full object-cover"
-                />
-              ) : (
-                <User className="h-8 w-8 text-[#1D1D1F]/30" />
-              )}
-            </div>
-
-            <div>
-              <div className="flex items-center gap-2">
-                <h1 className="text-xl font-bold text-[#1D1D1F]">
-                  {profile?.full_name || "Vendeur ZeMarket"}
-                </h1>
-                {profile?.is_verified && (
-                  <BadgeCheck className="h-5 w-5 text-[#00A651]" />
-                )}
-                {profile?.is_boosted && (
-                  <span className="rounded-full bg-amber-100 px-2.5 py-1 text-xs font-semibold text-amber-700">
-                    ⚡ Boosté
-                  </span>
+            <div className="flex items-center gap-4">
+              <div className="flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-full bg-black/5">
+                {profile?.avatar_url ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={profile.avatar_url}
+                    alt={profile.full_name || "Vendeur"}
+                    className="h-full w-full object-cover"
+                  />
+                ) : (
+                  <User className="h-8 w-8 text-[#1D1D1F]/30" />
                 )}
               </div>
-              <p className="text-sm font-light text-[#1D1D1F]/50">
-                {listings.length} annonce(s) publiée(s)
-              </p>
+
+              <div>
+                <div className="flex items-center gap-2">
+                  <h1 className="text-xl font-bold text-[#1D1D1F]">
+                    {profile?.full_name || "Vendeur ZeMarket"}
+                  </h1>
+                  {profile?.is_verified && (
+                    <BadgeCheck className="h-5 w-5 text-[#00A651]" />
+                  )}
+                  {profile?.is_boosted && (
+                    <span className="rounded-full bg-amber-100 px-2.5 py-1 text-xs font-semibold text-amber-700">
+                      ⚡ Boosté
+                    </span>
+                  )}
+                </div>
+                <p className="text-sm font-light text-[#1D1D1F]/50">
+                  {listings.length} annonce(s) publiée(s)
+                </p>
+              </div>
             </div>
-          </div>
 
-          {profile?.bio && (
-            <p className="mt-6 leading-7 text-[#1D1D1F]/70">{profile.bio}</p>
-          )}
+            {profile?.bio && (
+              <p className="mt-6 leading-7 text-[#1D1D1F]/70">{profile.bio}</p>
+            )}
 
-          {profile?.hours && (
-            <p className="mt-3 text-sm font-medium text-[#1D1D1F]/60">
-              🕒 {profile.hours}
-            </p>
-          )}
+            {profile?.hours && (
+              <p className="mt-3 text-sm font-medium text-[#1D1D1F]/60">
+                🕒 {profile.hours}
+              </p>
+            )}
           </div>
         </motion.div>
 
@@ -211,5 +211,4 @@ export default function VendeurProfilePage() {
       </div>
     </main>
   );
-          }
-            
+}
