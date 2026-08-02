@@ -70,8 +70,40 @@ function RechercheContent() {
           Professionnels pour "{query}"
         </h1>
         <p className="mt-1 text-sm font-light text-[#1D1D1F]/50">
-          {loading ? "Recherche en cours..." : `${results.length} résultat(s) trouvé(s)`}
+          {loading ? "Recherche en cours..." : `${filteredResults.length} résultat(s) trouvé(s)`}
         </p>
+
+        {!loading && results.length > 0 && (
+          <div className="mt-6 flex flex-wrap gap-3">
+            <input
+              type="text"
+              value={cityFilter}
+              onChange={(e) => setCityFilter(e.target.value)}
+              placeholder="Filtrer par ville"
+              className="rounded-full border border-black/10 bg-white px-4 py-2 text-sm outline-none focus:border-[#00A651]/40"
+            />
+
+            <select
+              value={typeFilter}
+              onChange={(e) => setTypeFilter(e.target.value as typeof typeFilter)}
+              className="rounded-full border border-black/10 bg-white px-4 py-2 text-sm outline-none focus:border-[#00A651]/40"
+            >
+              <option value="tous">Tous types</option>
+              <option value="produit">Produits</option>
+              <option value="service">Services</option>
+            </select>
+
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value as typeof sortBy)}
+              className="rounded-full border border-black/10 bg-white px-4 py-2 text-sm outline-none focus:border-[#00A651]/40"
+            >
+              <option value="recent">Plus récent</option>
+              <option value="prix_asc">Prix croissant</option>
+              <option value="prix_desc">Prix décroissant</option>
+            </select>
+          </div>
+        )}
 
         {loading ? (
           <div className="mt-16 flex justify-center">
