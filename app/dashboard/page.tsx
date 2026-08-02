@@ -190,7 +190,12 @@ export default function DashboardPage() {
                   <div className="min-w-0 flex-1">
                     <p className="truncate font-semibold text-[#1D1D1F]">{listing.title}</p>
                     <p className="text-sm text-[#00A651]">{listing.price}</p>
-                    <p className="text-xs font-light text-[#1D1D1F]/40">{listing.city}</p>
+                    <div className="flex items-center gap-3 text-xs font-light text-[#1D1D1F]/40">
+                      <span>{listing.city}</span>
+                      <span className="flex items-center gap-1">
+                        ❤️ {favoriteCounts[listing.id] || 0}
+                      </span>
+                    </div>
                   </div>
 
                   <button
