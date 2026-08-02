@@ -65,13 +65,14 @@ export default function DashboardPage() {
 
       const { data: profile } = await supabase
         .from("profiles")
-        .select("is_verified, is_boosted")
+        .select("is_verified, is_boosted, full_name, avatar_url")
         .eq("id", uid)
         .maybeSingle();
 
       setIsVerified(profile?.is_verified === true);
       setIsBoosted(profile?.is_boosted === true);
-
+      setFullName(profile?.full_name || null);
+      setAvatarUrl(profile?.avatar_url || null);
       setCheckingAuth(false);
     });
   }, [router]);
