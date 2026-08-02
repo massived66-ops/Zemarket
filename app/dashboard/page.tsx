@@ -22,7 +22,8 @@ export default function DashboardPage() {
   const [checkingAuth, setCheckingAuth] = useState(true);
   const [userId, setUserId] = useState<string | null>(null);
   const [userEmail, setUserEmail] = useState<string | null>(null);
-
+  const [fullName, setFullName] = useState<string | null>(null);
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const [listings, setListings] = useState<Listing[]>([]);
   const [favoriteCounts, setFavoriteCounts] = useState<Record<string, number>>({});
   const [isVerified, setIsVerified] = useState(false);
