@@ -346,6 +346,13 @@ function Header() {
           .eq("id", data.session.user.id)
           .maybeSingle();
         setProfile(profileData);
+
+        const { count } = await supabase
+          .from("notifications")
+          .select("*", { count: "exact", head: true })
+          .eq("user_id", data.session.user.id)
+          .eq("is_read", false);
+        setUnreadCount(count ?? 0);
       }
     });
 
