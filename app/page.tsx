@@ -496,14 +496,24 @@ function Header() {
             transition={{ duration: 0.25 }}
             className="absolute top-24 z-40 w-[calc(100%-2rem)] max-w-md rounded-3xl border border-white/40 bg-white/90 p-4 backdrop-blur-xl shadow-xl md:hidden"
           >
-            <div className="relative mb-3 flex items-center">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (searchQuery.trim()) {
+                  window.location.href = `/recherche?q=${encodeURIComponent(searchQuery.trim())}`;
+                }
+              }}
+              className="relative mb-3 flex items-center"
+            >
               <Search className="pointer-events-none absolute left-4 h-4 w-4 text-[#1D1D1F]/40" />
               <input
                 type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Rechercher..."
                 className="w-full rounded-full border border-black/5 bg-white py-2.5 pl-11 pr-4 text-sm outline-none focus:ring-2 focus:ring-[#00A651]/20"
               />
-            </div>
+            </form>
             <div className="flex flex-col gap-1">
               {user ? (
                 <>
