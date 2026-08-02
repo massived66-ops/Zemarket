@@ -128,7 +128,7 @@ function RechercheContent() {
             variants={{ visible: { transition: { staggerChildren: 0.06 } } }}
             className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
           >
-            {results.map((item) => (
+            {filteredResults.map((item) => (
               <motion.div
                 key={item.id}
                 variants={{
