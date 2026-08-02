@@ -44,6 +44,18 @@ function RechercheContent() {
     if (query) search();
   }, [query]);
 
+  const filteredResults = results
+    .filter((item) => (cityFilter ? item.city.toLowerCase().includes(cityFilter.toLowerCase()) : true))
+    .filter((item) => (typeFilter === "tous" ? true : item.listing_type === typeFilter))
+    .sort((a, b) => {
+      if (sortBy === "prix_asc" || sortBy === "prix_desc") {
+        const priceA = parseInt(a.price.replace(/[^0-9]/g, "")) || 0;
+        const priceB = parseInt(b.price.replace(/[^0-9]/g, "")) || 0;
+        return sortBy === "prix_asc" ? priceA - priceB : priceB - priceA;
+      }
+      return 0;
+    });
+
   return (
     <main className="min-h-screen bg-[#F5F5F7] px-4 py-16">
       <div className="mx-auto max-w-5xl">
