@@ -91,6 +91,13 @@ export default function AdminPage() {
         .eq("id", req.user_id);
     }
 
+    await supabase.from("notifications").insert({
+      user_id: req.user_id,
+      message: approve
+        ? "✓ Ton compte est maintenant vérifié sur ZeMarket !"
+        : "Ta demande de vérification a été refusée. Tu peux en soumettre une nouvelle.",
+    });
+
     setRequests((prev) => prev.filter((r) => r.id !== req.id));
     setProcessingId(null);
   };
