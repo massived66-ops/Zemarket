@@ -25,7 +25,9 @@ function RechercheContent() {
 
   const [results, setResults] = useState<Result[]>([]);
   const [loading, setLoading] = useState(true);
-
+  const [cityFilter, setCityFilter] = useState("");
+  const [typeFilter, setTypeFilter] = useState<"tous" | "produit" | "service">("tous");
+  const [sortBy, setSortBy] = useState<"recent" | "prix_asc" | "prix_desc">("recent");
   useEffect(() => {
     async function search() {
       setLoading(true);
