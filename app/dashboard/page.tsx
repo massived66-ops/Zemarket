@@ -108,10 +108,24 @@ export default function DashboardPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-2xl font-bold tracking-tight text-[#1D1D1F]">
-            Tableau de bord vendeur
-          </h1>
-          <p className="mt-1 text-sm font-light text-[#1D1D1F]/50">{userEmail}</p>
+          <div className="flex items-center gap-3">
+            {avatarUrl && (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={avatarUrl}
+                alt="Profil"
+                className="h-12 w-12 rounded-full object-cover"
+              />
+            )}
+            <div>
+              <h1 className="text-2xl font-bold tracking-tight text-[#1D1D1F]">
+                Tableau de bord vendeur
+              </h1>
+              <p className="mt-1 text-sm font-light text-[#1D1D1F]/50">
+                {fullName || userEmail}
+              </p>
+            </div>
+          </div>
 
           <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
             <div className="rounded-2xl border border-white/50 bg-white/70 p-4 backdrop-blur-xl">
