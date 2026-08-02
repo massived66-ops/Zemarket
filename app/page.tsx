@@ -335,6 +335,7 @@ function Toast({ toast }: { toast: ToastState }) {
 function Header() {
   const [user, setUser] = useState<{ email?: string; id?: string } | null>(null);
   const [profile, setProfile] = useState<{ full_name: string | null; avatar_url: string | null; is_admin?: boolean } | null>(null);
+  const [unreadCount, setUnreadCount] = useState(0);
 
   useEffect(() => {
     supabase.auth.getSession().then(async ({ data }) => {
