@@ -29,6 +29,7 @@ import {
   Heart,
   MessageCircle,
   BadgeCheck,
+  Bell,
   MapPin,
   Star,
   ChevronLeft,
