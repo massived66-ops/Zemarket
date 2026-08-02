@@ -549,6 +549,14 @@ function Header() {
                   >
                     Mon profil
                   </Link>
+                  {profile?.is_admin && (
+                    <Link
+                      href="/admin"
+                      className="rounded-xl px-4 py-2.5 text-left text-sm font-medium text-red-600 hover:bg-black/5"
+                    >
+                      Administration
+                    </Link>
+                  )}
                   <span className="flex items-center gap-2 truncate rounded-xl px-4 py-2.5 text-sm font-medium text-[#1D1D1F]/70">
                     {profile?.avatar_url ? (
                       // eslint-disable-next-line @next/next/no-img-element
