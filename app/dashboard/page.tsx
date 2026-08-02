@@ -39,11 +39,26 @@ export default function DashboardPage() {
       setUserId(uid);
       setUserEmail(data.session.user.email ?? null);
 
-      const { data: myListings } = await supabase
+ const { data: myListings } = await supabase
         .from("listings")
         .select("id, title, price, city, image_url, listing_type, created_at")
         .eq("user_id", uid)
         .order("created_at", { ascending: false });
+
+      if (myListings && myListings.length > 0) {
+        const listingIds = myListings.map((l) => l.id);
+        const { data: favData } = await supabase
+          .from("favorites")
+          .select("listing_id")
+          .in("listing_id", listingIds);
+
+        const counts: Record<string, number> = {};
+        (favData || []).forEach((f) => {
+          counts[f.listing_id] = (counts[f.listing_id] || 0) + 1;
+        });
+
+        setFavoriteCounts(counts);
+      }
 
       setListings(myListings ?? []);
 
