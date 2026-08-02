@@ -341,7 +341,7 @@ function Header() {
       if (data.session?.user) {
         const { data: profileData } = await supabase
           .from("profiles")
-          .select("full_name, avatar_url")
+          .select("full_name, avatar_url, is_admin")
           .eq("id", data.session.user.id)
           .maybeSingle();
         setProfile(profileData);
