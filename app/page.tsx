@@ -441,12 +441,13 @@ function Header() {
                 className="rounded-full px-4 py-2 text-sm font-medium text-[#1D1D1F] transition hover:bg-black/5"
               >
                 Mes favoris
-              </Link>
-              <Link
-                href="/parametres"
-                className="rounded-full px-4 py-2 text-sm font-medium text-[#1D1D1F] transition hover:bg-black/5"
-              >
-                Mon profil
+              <Link href="/notifications" className="relative flex h-9 w-9 items-center justify-center rounded-full transition hover:bg-black/5">
+                <Bell className="h-5 w-5 text-[#1D1D1F]" />
+                {unreadCount > 0 && (
+                  <span className="absolute right-1 top-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[9px] font-bold text-white">
+                    {unreadCount > 9 ? "9+" : unreadCount}
+                  </span>
+                )}
               </Link>
               {profile?.is_admin && (
                 <Link
