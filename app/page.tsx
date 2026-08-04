@@ -441,6 +441,7 @@ function Header() {
                 className="rounded-full px-4 py-2 text-sm font-medium text-[#1D1D1F] transition hover:bg-black/5"
               >
                 Mes favoris
+              </Link>
               <Link href="/notifications" className="relative flex h-9 w-9 items-center justify-center rounded-full transition hover:bg-black/5">
                 <Bell className="h-5 w-5 text-[#1D1D1F]" />
                 {unreadCount > 0 && (
